@@ -18,7 +18,7 @@ int recursive_quick_sort(int *array, size_t size, size_t low, size_t high)
 		pi = partition(array, size, low, high);
 		if (pi > 0)
 			recursive_quick_sort(array, size, low, pi - 1);
-		if (pi < size)
+		if (pi < size - 1)
 			recursive_quick_sort(array, size,  pi + 1, high);
 	}
 
@@ -48,13 +48,17 @@ size_t partition(int *array, size_t size, size_t low, size_t high)
 			tmp = array[j];
 			array[j] = array[i];
 			array[i] = tmp;
-			/*print_array(array, size);*/
+			if (i != j)
+				print_array(array, size);
 		}
 	}
-	tmp = array[i + 1];
-	array[i + 1] = array[high];
-	array[high] = tmp;
-	print_array(array, size);
+	if (array[i + 1] != array[high])
+	{
+		tmp = array[i + 1];
+		array[i + 1] = array[high];
+		array[high] = tmp;
+		print_array(array, size);
+	}
 
 	return (i + 1);
 }
